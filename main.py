@@ -1,5 +1,5 @@
 import discord, os, threading, asyncio, aiohttp, json, requests
-from multiprocesing import Pool as ThreadPool
+from multiprocesing.dummy import Pool as ThreadPool
 from  discord.ext import commands 
 from  threading import Thread 
 from requests import put
