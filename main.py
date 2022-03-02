@@ -1,4 +1,4 @@
-import os, threading, asyncio
+import os, threading, asyncio, json
 from multiprocessing.dummy import Pool as ThreadPool
 os.system('pip install discord.py')
 os.system('pip install aiohttp[speedup]')
@@ -19,7 +19,7 @@ srvr = bot.get_guild(guild)
 async def main(srvr, member):
    async with aiohttp.ClientSession() as session:
       async with session.put(f'https://discord.com/api/v10/guilds/{srvr}/bans/{member}', data=b'data') as r:
-         if r.response == '200' or r.response == '201' or r.response == "203":
+         if r.status == 200 or r.status == 201 or r.status == 2003:
             print(f'killed {member.name}')
 
 
