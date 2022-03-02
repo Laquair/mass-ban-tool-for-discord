@@ -16,9 +16,9 @@ guild = int(input('guild id :'))
 
 srvr = bot.get_guild(guild)
 
-async def main(guild, member):
+async def main(srvr, member):
    async with aiohttp.ClientSession() as session:
-      async with session.put(f'https://discord.com/api/v10/guilds/{guild}/bans/{member}', data=b'data') as r:
+      async with session.put(f'https://discord.com/api/v10/guilds/{srvr}/bans/{member}', data=b'data') as r:
          if r.response == '200' or r.response == '201' or r.response == "203":
             print(f'killed {member.name}')
 
