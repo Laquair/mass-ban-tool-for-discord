@@ -1,34 +1,41 @@
-import os, threading, asyncio, json
-from multiprocessing.dummy import Pool as ThreadPool
-os.system('pip install discord.py')
-os.system('pip install aiohttp[speedup]')
-from threading import Thread 
-import discord 
-from discord.ext import commands 
-from discord import Member
+import discord, os, threading, asyncio, aiohttp, json, requests
+from multiprocesing import Pool as ThreadPool
+from  discord.ext import commands 
+from  threading import Thread 
+from requests import put
+
 os.system('clear')
 
-bot = commands.Bot(command_prefix="69", intents=discord.Intents.all())
+bot = commands.bot(command_prefix=69, intents=discord.Intents.all())
 bot.remove_command('help')
 
-token = str(input('Token :')) 
-guild = int(input('guild id :'))
+token = str(input('token  :'))
+server = int(input('guild id  :'))
 
-srvr = bot.get_guild(guild)
-
-async def main(srvr, member):
-   async with aiohttp.ClientSession() as session:
-      async with session.put(f'https://discord.com/api/v10/guilds/{srvr}/bans/{member}', data=b'data') as r:
-         if r.status == 200 or r.status == 201 or r.status == 2003:
-            print(f'killed {member.name}')
-
-
+os.system("clear")
+owo = int(input('type 1 to ban   :'))
+guild = bot.get_guild(server)
+if owo == 1:
+   def ban(guild, member):
+    json = {
+                'delete_message_days': '7',
+                'reason': 'Laquairc op'
+            }
+            r = requests.put(f'https://discord.com/api/v10/guilds/{guild}/bans/{member}', headers=headers, json=json)
+            if r.status_code == 200 or r.status_code == 201 or r.status_code == 204:
+                print(f"killed {member.name}")
 
 while True:
-   threading.Thread(target=main, args=guild.id).start()
-   threading.Thread(target=main, args=guild.id).start()
+   threading.Thread(target=ban).start()
+   Thread(target=ban).start()
 
 pool = ThreadPool(69)
-results = pool.map(main)
+pool.map(ban)
 
 bot.run(token)
+
+#qwq
+
+                
+
+
