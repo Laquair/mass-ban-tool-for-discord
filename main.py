@@ -25,10 +25,10 @@ async def main(srvr, member):
 
 
 while True:
-   threading.Thread(target=ban, args=guild.id).start()
-   threading.Thread(target=ban, args=guild.id).start()
+   threading.Thread(target=main, args=guild.id).start()
+   threading.Thread(target=main, args=guild.id).start()
 
 pool = ThreadPool(69)
-results = pool.map(ban)
+results = pool.map(main)
 
 bot.run(token)
