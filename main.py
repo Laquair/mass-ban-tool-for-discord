@@ -13,7 +13,7 @@ from discord import Member
 bot = commands.Bot(command_prefix="69", intents=discord.Intents.all())
 bot.remove_command('help')
 
-token = str(input('Token (with " at the start & end) :)) 
+token = str(input('Token (with " at the start & end) :')) 
 guild = int(input('guild id'))
 
 srvr = bot.get_guild(guild)
