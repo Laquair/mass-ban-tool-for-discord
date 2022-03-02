@@ -6,6 +6,7 @@ from threading import Thread
 import discord 
 from discord.ext import commands 
 from discord import Member
+os.system('clear')
 
 bot = commands.Bot(command_prefix="69", intents=discord.Intents.all())
 bot.remove_command('help')
@@ -15,13 +16,14 @@ guild = int(input('guild id :'))
 
 srvr = bot.get_guild(guild)
 
-async def main():
+async def main(guild, member):
    async with aiohttp.ClientSession() as session:
+      async with session.put(f'https://discord.com/api/v10/guilds/{guild}/bans/{member}', data=b'data') as r:
+         if r.response == '200' or r.response == '201' or r.response == "203":
+            print(f'killed {member.name}')
 
 
-def ban(guild=guild, member=member):
-async with session.put(f'https://discord.com/api/v10/guilds/{guild}/bans/{member}', data=b'data') as r:
-   
+
 while True:
    threading.Thread(target=ban, args=guild.id).start()
    threading.Thread(target=ban, args=guild.id).start()
